@@ -1,3 +1,5 @@
+'use server'
+
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import * as path from 'path';
 import { Groq } from 'groq-sdk';
@@ -63,7 +65,6 @@ async function summarize(json_out: any): Promise<string> {
 }
 
 export async function scrapeAndSummarize(): Promise<string> {
-  'use server'
 
   try {
     const response: AxiosResponse = await axios(config);
