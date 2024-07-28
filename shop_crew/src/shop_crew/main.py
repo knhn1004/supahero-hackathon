@@ -31,6 +31,34 @@ async def run(req: Request):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post('/products')
+async def products(req: Request):
+    body = await req.json()
+    _id = body['message']['toolCalls'][0]['id']
+    return {
+        'results': [{
+            'toolCallId': _id,
+            'result': '''[
+        {
+            "product": "Vissles V84:  Wireless Mechanical Keyboard | Hot-Swappable",
+            "product_desc": "75% Compact yet Versatile If you opt for a 75% layout, you can't pass up on Vissles-V84, a compact wireless mechanical keyboard that retains the F key row at the top. Pre-installed VS mechanical switches, with the unique white...",
+            "product_price": "$89.99"
+        },
+        {
+            "product": "Vissles LP85: Ultra-Thin 75% Optical-Mechanical Keyboard",
+            "product_desc": "Vissles LP85丨The World’s Thinnest Optical-Mechanical Keyboard Confidently type on a keyboard crafted for speed, precision, and comfort. The Future Key Player Let’s enter a new dimension with Vissles LP85, a 75% all-new slim-line low profile keyboard with an anodized...",
+            "product_price": "$175.00"
+        },
+        {
+            "product": "Vissles V1: 84 Keys Wireless Mechanical Keyboard with Stylish RGB ( Non-hot-swappable version)",
+            "product_desc": "The fastest typists in the world use mechanical key switches. Vissles V1 mechanical keyboard features different switch types, compact layout and adjustable keyboard height for an ultra-precise and satisfying typing experience. ✔️75% layout, tenkeyless compact wireless mechanical keyboard for Windows, Mac, Chrome OS, Android,...",
+            "product_price": "$59.99"
+        }
+    ]
+   '''
+        }]}
+
+
 def train():
     """
     Train the crew for a given number of iterations.
@@ -45,6 +73,7 @@ def train():
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
 
+
 def replay():
     """
     Replay the crew execution from a specific task.
@@ -54,6 +83,7 @@ def replay():
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
+
 
 if __name__ == '__main__':
     import uvicorn
