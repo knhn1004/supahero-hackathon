@@ -33,7 +33,7 @@ def train():
     Train the crew for a given number of iterations.
     """
     inputs = {
-        "topic": "AI LLMs"
+        "topic": "keyboard company"
     }
     try:
         ShopCrewCrew().crew().train(
@@ -41,7 +41,6 @@ def train():
 
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
-
 
 def replay():
     """
@@ -52,7 +51,6 @@ def replay():
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
-
 
 if __name__ == '__main__':
     import uvicorn
