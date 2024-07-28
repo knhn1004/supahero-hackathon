@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+import json
 import sys
 from shop_crew.crew import ShopCrewCrew
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 # This main file is intended to be a way for your to run your
@@ -17,13 +19,14 @@ class InputModel(BaseModel):
 
 
 @app.post('/run')
-async def run(inputs: InputModel):
+# async def run(inputs: InputModel):
+async def run(req: Request):
     """
     Run the crew.
     """
+    body = await req.json()
     try:
-        result = ShopCrewCrew().crew().kickoff(inputs=inputs.dict())
-        return {"result": result}
+        return {"result": ""}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
