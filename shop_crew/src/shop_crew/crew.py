@@ -14,34 +14,33 @@ class ShopCrewCrew():
 	tasks_config = 'config/tasks.yaml'
 
 	@agent
-	def researcher(self) -> Agent:
+	def support_agent(self) -> Agent:
 		return Agent(
-			config=self.agents_config['researcher'],
+			config=self.agents_config['support_agent'],
 			# tools=[MyCustomTool()], # Example of custom tool, loaded on the beginning of file
 			verbose=True
 		)
 
 	@agent
-	def reporting_analyst(self) -> Agent:
+	def retrieval_agent(self) -> Agent:
 		return Agent(
-			config=self.agents_config['reporting_analyst'],
+			config=self.agents_config['retrieval_agent'],
+			# tools=[SerperDevTool()], # Example of custom tool, loaded on the beginning of file
 			verbose=True
 		)
-
+	
 	@task
-	def research_task(self) -> Task:
+	def question_answer_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['research_task'],
-			agent=self.researcher()
+			config=self.tasks_config['question_answer_task'],
+			agent=self.support_agent()
 		)
-
-	@task
-	def reporting_task(self) -> Task:
+	@task 
+	def retrieval_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['reporting_task'],
-			agent=self.reporting_analyst(),
-			output_file='report.md'
-		)
+			config=self.tasks_config['retrieval_task'],
+			agent=self.retrieval_agent()
+			)
 
 	@crew
 	def crew(self) -> Crew:
