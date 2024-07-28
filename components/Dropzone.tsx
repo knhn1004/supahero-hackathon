@@ -3,6 +3,7 @@
 import { useFile } from "@/hooks/supabase";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { Button } from "@/components/ui/button";
 
 export default function Dropzone() {
   const { file, setFile, uploadFile } = useFile();
@@ -13,20 +14,27 @@ export default function Dropzone() {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
-    <div>
-      <div className="h-60 w-60 border-2 border-black" {...getRootProps()}>
+    <div className="flex flex-col">
+      <div
+        className="flex justify-center h-40 w-120 border-2 border-dotted border-black bg-blue-300 hover:bg-blue-400 rounded-3xl p-10 mb-3"
+        {...getRootProps()}
+      >
         <input {...getInputProps()} />
         {file?.name ? (
           <div>{file.name}</div>
         ) : isDragActive ? (
-          <p>Drop the files here ...</p>
+          <p className="text-lg w-[300px] text-center">
+            Drop the files here ...
+          </p>
         ) : (
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p className="text-lg w-[300px] text-center">
+            Drag 'n' drop some files here, or click to select files
+          </p>
         )}
       </div>
-      <button className="border-2 border-black" onClick={uploadFile}>
-        submit
-      </button>
+      <Button variant="default" onClick={uploadFile}>
+        Submit
+      </Button>
     </div>
   );
 }

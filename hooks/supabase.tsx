@@ -73,3 +73,5 @@ export const signIn = async ({
   }
   console.log(data);
 };
+
+export default supabase;

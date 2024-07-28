@@ -13,12 +13,12 @@ export default function Home() {
       const summary = await scrapeAndSummarize();
       console.log(summary[0]);
     };
-    getData();
+    // getData();
   }, []);
 
   return (
     <main className="h-screen w-screen flex items-center justify-center">
-      <Dropzone />
+      Main page
     </main>
   );
 }
